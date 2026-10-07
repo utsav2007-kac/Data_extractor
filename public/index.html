@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Maps Lead Extractor Pro</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>Google Maps Lead Extractor Pro</h1>
+      <p>Live Google Maps extraction • Real data only • No fabricated leads</p>
+    </header>
+
+    <main class="main-content">
+      <div class="control-panel card">
+        <form id="jobForm" class="job-form">
+          <div class="form-group">
+            <label for="keyword">Business Category / Keyword</label>
+            <input type="text" id="keyword" required placeholder="e.g. cafes, plumbers">
+          </div>
+          <div class="form-group">
+            <label for="location">Target Location</label>
+            <input type="text" id="location" required placeholder="e.g. London, New York">
+          </div>
+          <div class="form-group">
+            <label for="leadLimit">Maximum Lead Target</label>
+            <input type="number" id="leadLimit" required min="1" max="5000" value="100">
+          </div>
+          <button type="submit" id="startBtn" class="btn btn-primary">Start Extraction</button>
+        </form>
+      </div>
+
+      <div id="activeJobSection" class="active-job card" style="display: none;">
+        <div class="job-header">
+          <h2>Active Extraction</h2>
+          <span id="jobStatusBadge" class="badge">queued</span>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Target</span>
+            <span id="statTarget" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Processed</span>
+            <span id="statProcessed" class="stat-value">0</span>
+          </div>
+          <div class="stat-box highlight-stat">
+            <span class="stat-label">Real Leads Extracted</span>
+            <span id="statSaved" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Duplicates</span>
+            <span id="statDuplicates" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Failed</span>
+            <span id="statFailed" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+          </div>
+          <span id="progressText" class="progress-text">0%</span>
+        </div>
+        
+        <div id="jobMessage" class="job-message"></div>
+
+        <div class="action-buttons">
+          <button id="pauseBtn" class="btn btn-secondary">Pause</button>
+          <button id="resumeBtn" class="btn btn-primary" style="display: none;">Resume</button>
+          <button id="cancelBtn" class="btn btn-danger">Cancel</button>
+          
+          <div class="export-dropdown" id="exportContainer" style="display: none;">
+            <button class="btn btn-success" id="exportBtnText">Export Leads</button>
+            <div class="dropdown-content">
+              <a href="#" id="exportCsv">CSV</a>
+              <a href="#" id="exportJson">JSON</a>
+              <a href="#" id="exportXlsx">XLSX</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="leads-section card">
+        <div class="leads-header">
+          <h2>Extracted Leads</h2>
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search saved leads...">
+          </div>
+        </div>
+        <div class="table-container">
+          <table id="leadsTable">
+            <thead>
+              <tr>
+                <th>Business Name</th>
+                <th>Phone Number</th>
+                <th>Full Address</th>
+                <th>Rating</th>
+                <th>Reviews</th>
+                <th>Website</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody">
+              <tr>
+                <td colspan="6" class="empty-state">No real leads extracted yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="paginationControls" style="display: none;">
+          <button id="prevPageBtn" class="btn btn-secondary">Previous</button>
+          <span id="pageInfo">Page 1</span>
+          <button id="nextPageBtn" class="btn btn-secondary">Next</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: google-maps-lead-extractor-api
+    env: docker
+    plan: starter # Chromium requires memory, so avoid free instances
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MAX_CONCURRENT_JOBS
+        value: 1
+      - key: CORS_ORIGIN
+        value: https://mydomain.com
+    disk:
+      name: sqlite-data
+      mountPath: /usr/src/app/data
+      sizeGB: 1
