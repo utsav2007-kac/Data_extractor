@@ -1,5 +1,5 @@
 # Use the official Node.js image as base
-FROM node:20-bookworm-slim
+FROM node:22-bookworm-slim
 
 # Install system dependencies required for Playwright/Chromium
 # This avoids installing full browsers globally and just installs dependencies
